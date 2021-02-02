@@ -1,0 +1,100 @@
+//#define _CRT_SECURE_NO_WARNINGS
+//#include <iostream>
+//using namespace std;
+//
+//int main()
+//{
+//	FILE* f;
+//	try
+//	{
+//		f=fopen("Text.txt", "r+");
+//		if (f)
+//		{
+//			char s[1024];
+//			cout << "File open!" << endl;
+//			while (!feof(f))
+//			{
+//				fgets(s, 1024, f);
+//				cout << s;
+//			}
+//			int c = fseek(f, 10, 0);
+//		int r =	fputs("\nTaras", f);
+//		cout << "Write: " << r << endl;
+//		cout << "Seek: " << c << endl;
+//		
+//		}
+//		
+//		
+//	}
+//	catch (const exception&)
+//	{
+//		cout << "Error open!" << endl;
+//	}
+//
+//	try
+//	{
+//		if(f)
+//		fclose(f);
+//	}
+//	catch (const std::exception&)
+//	{
+//		cout << "Error close!" << endl;
+//	}
+//	
+//}
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+int main()
+{
+	string name = "text.txt";
+	ofstream F;
+	F.open(name, ostream::out | ostream::app);
+	try
+	{
+		if (F.is_open())
+		{
+			cout << "File open! Congratuions!" << endl;
+		}
+		F << "Taras" << " Bartoshevskiy" << endl;
+	}
+	catch (const std::exception&)
+	{
+		cout << "File not open(((" << endl;
+	}
+	try
+	{
+		if (F)
+			F.close();
+	}
+	catch (const std::exception&)
+	{
+		cout << "File not open!" << endl;
+	}
+	ifstream F1;
+	char x;
+	F1.open(name, istream::in|istream::app);
+	try
+	{
+		while (!F1.eof())
+		{
+			x = F1.get();
+			cout << x;
+		}
+	}
+		catch (const std::exception&)
+		{
+			cout << "File not open(((" << endl;
+		}
+		try
+		{
+			if (F1)
+				F1.close();
+		}
+		catch (const std::exception&)
+		{
+			cout << "File is close" << endl;
+		}
+		
+}
