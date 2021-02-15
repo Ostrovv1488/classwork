@@ -1,0 +1,68 @@
+bool funcSort(int i, int i2)
+{
+	return i > i2;
+}
+class Student
+{
+	string m_Name;
+	vector<int>m_ocinka;
+public:
+	Student(){}
+	Student(string name, vector<int>oc) :m_Name(name)
+	{
+		for (auto i : oc)
+			m_ocinka.push_back(i);
+	};
+	void PrintInfo()
+	{
+		cout << "Name student: " << m_Name << endl;
+		for (auto u : m_ocinka)
+			cout << "Ocenka: " << u << endl;
+	}
+	vector<int>& getVector()
+	{
+		return m_ocinka;
+	}
+	int getEverage()
+	{
+		int x = 0;
+		int sum = 0;
+		for (auto i : m_ocinka)
+		{
+			x++;
+			sum += i;
+		}
+		return sum / x;
+	}
+	string& getName() { return m_Name; }
+};
+bool sortVec(Student a1, Student a2)
+{
+	return bool(a1.getEverage() > a2.getEverage());
+}
+void Show(Student& s)
+{
+	cout << "Average: " << s.getEverage() << endl;
+	s.PrintInfo();
+}
+bool findName( Student& obj)
+{
+	string name = "Stepan";
+	return (name == obj.getName());
+}
+int main()
+{
+
+	Student first("Taras", vector<int>{5, 4, 10, 1, 3, 5});
+	
+	sort(first.getVector().begin(), first.getVector().end(), funcSort);
+	Student second("Ivan", vector<int>{0, 4, 2, 2, 3, 2});
+	Student three("Stepan", vector<int>{5, 1, 2, 6, 3, 5});
+	Student four("Anatoliy", vector<int>{3, 4, 2, 5, 3, 5});
+	vector<Student>st{first, second, three, four};
+	sort(st.begin(), st.end(), sortVec);
+	cout << "Find Stepan" << endl;
+	find_if(st.begin(), st.end(), findName)->PrintInfo();
+	cout << "-=================\n";
+	for_each(st.begin(), st.end(), Show);
+}
